@@ -6,6 +6,10 @@ class User < ApplicationRecord
 
   before_validation :set_user_numbers, if: -> { !user_numbers.present? }
 
+  has_many :owned_servers, class_name: "Server", foreign_key: "owner_id"
+  has_many :server_memberships, class_name: "Server::Membership"
+  has_many :joined_servers, through: :server_memberships, source: :server
+  
 private
 
   def set_user_numbers

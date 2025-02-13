@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_10_193800) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_12_193141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "channel_messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "server_channel_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["server_channel_id"], name: "index_channel_messages_on_server_channel_id"
+    t.index ["user_id"], name: "index_channel_messages_on_user_id"
+  end
+
+  create_table "server_channels", force: :cascade do |t|
+    t.string "name"
+    t.bigint "server_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["server_id"], name: "index_server_channels_on_server_id"
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.string "name"
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_servers_on_owner_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +53,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_10_193800) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "channel_messages", "server_channels"
+  add_foreign_key "channel_messages", "users"
+  add_foreign_key "server_channels", "servers"
+  add_foreign_key "servers", "users", column: "owner_id"
 end

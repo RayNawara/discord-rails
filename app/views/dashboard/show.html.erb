@@ -1,4 +1,6 @@
-<div>
-  <h1 class="font-bold text-4xl">Dashboard#show</h1>
-  <p>Find me in app/views/dashboard/show.html.erb</p>
+<div class="w-full h-screen bg-indigo-900 flex pt-16 overflow-hidden">
+  <%= render "sidebar" %>
+  <div class="w-full flex flex-col">
+    <%= turbo_frame_tag :dashboard %>
+  </div>
 </div>
