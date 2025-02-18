@@ -1,5 +1,6 @@
 <%= link_to server, data: { turbo_frame: :dashboard } do %>
-  <div class="p-2 w-full bg-gray-600">
+  <div class="p-2 w-full bg-gray-600 hover:bg-gray-900 rounded-lg flex flex-col items-center">
     <span class="text-xl text-gray-100"> <%= server.name %> </span>
+    <%= image_tag(server.image, class: "w-16 h-16 rounded-full object-cover") if server.image.attached? %>
   </div>
 <% end %>
