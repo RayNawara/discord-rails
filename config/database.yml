@@ -83,9 +83,10 @@ test:
 production:
   primary: &primary_production
     <<: *default
+    host: <%= ENV["POSTGRES_HOST"] %>
     database: discord_rails_production
     username: discord_rails
-    password: <%= ENV["DISCORD_RAILS_DATABASE_PASSWORD"] %>
+    password: <%= ENV["POSTGRES_PASSWORD"] %>
   cache:
     <<: *primary_production
     database: discord_rails_production_cache
