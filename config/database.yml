@@ -85,7 +85,7 @@ production:
     <<: *default
     host: <%= ENV["POSTGRES_HOST"] %>
     database: discord_rails_production
-    username: discord_rails
+    username: <%= ENV["POSTGRES_USERNAME"] %>
     password: <%= ENV["POSTGRES_PASSWORD"] %>
   cache:
     <<: *primary_production
