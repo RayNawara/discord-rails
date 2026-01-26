@@ -65,6 +65,6 @@ group :development do
 end
 
 
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 
 gem "tailwind_devise", "~> 0.0.3"
